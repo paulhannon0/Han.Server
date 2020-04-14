@@ -1,0 +1,36 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Han.Server",
+            "enableStepFiltering": false,
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/Han.Server.Api/bin/Debug/netcoreapp3.1/Han.Server.Api.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/Han.Server.Api",
+            "stopAtEntry": false,
+            "justMyCode": false,
+            "internalConsoleOptions": "openOnSessionStart",
+            "launchBrowser": {
+                "enabled": false,
+                "args": "${auto-detect-url}",
+                "windows": {
+                    "command": "cmd.exe",
+                    "args": "/C start ${auto-detect-url}"
+                },
+                "osx": {
+                    "command": "open"
+                },
+                "linux": {
+                    "command": "xdg-open"
+                }
+            },
+            "env": {
+                "DATABASE_CONNECTION_STRING": "Server=localhost;Uid=root;Pwd=admin",
+                "DATABASE_NAME": "Han"
+            }
+        }
+    ]
+}
