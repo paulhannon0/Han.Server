@@ -20,6 +20,10 @@ This layer is the application host, as well as containing the endpoint controlle
 
 This layer contains the commands/queries which contain the business logic for a given operation, as well as data transfer objects for these operations.
 
+### Han.Server.Common
+
+This layer contains any resources which could be used across projects, such as exceptions or helpers.
+
 ### Han.Server.Data
 
 This layer contains the repositories used to interact with the database, as well as data transfer objects for these interactions.
