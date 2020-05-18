@@ -24,7 +24,7 @@ This layer contains components which can be used in any layer, such as custom ex
 
 ### Han.Server.Data
 
-This layer contains the repositories used to interact with the database, as well as data transfer objects for these interactions.
+This layer contains the repositories used to interact with the database, as well as migration scripts and data transfer objects for these interactions.
 
 ### Han.Server.Tests
 
