@@ -1,5 +1,3 @@
-using System;
-
 namespace Han.Server.Api.Models.Widgets
 {
     public class CreateWidgetResponseModel

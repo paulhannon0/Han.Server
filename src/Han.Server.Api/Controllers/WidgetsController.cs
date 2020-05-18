@@ -27,8 +27,7 @@ namespace Han.Server.Api.Controllers
 
         [HttpPost("/widgets")]
         [Consumes("application/json")]
-        // TODO: Fix model binding
-        public async Task<IActionResult> Post([FromBody] CreateWidgetRequestModel requestModel)
+        public async Task<IActionResult> Create(CreateWidgetRequestModel requestModel)
         {
             var commandRequest = requestModel.ToCommandRequest();
             var commandResponse = await this.createWidgetCommand.ExecuteAsync(commandRequest);
@@ -38,10 +37,9 @@ namespace Han.Server.Api.Controllers
 
         [HttpGet("/widgets/{Id}")]
         [Produces("application/json")]
-        // TODO: Fix model binding
-        public async Task<ActionResult<GetWidgetResponseModel>> Get([FromRoute] GetWidgetRequestModel requestModel)
+        public async Task<ActionResult<GetWidgetResponseModel>> Get([FromRoute] ulong id)
         {
-            var queryRequest = requestModel.ToQueryRequest();
+            var queryRequest = new GetWidgetQueryRequestModel { Id = id };
             var queryResponse = await this.getWidgetQuery.ExecuteAsync(queryRequest);
 
             return GetWidgetResponseModel.FromBusinessModel(queryResponse);
