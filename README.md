@@ -3,7 +3,7 @@
 ## Installation and Usage
 
 1. Clone the repository from GitHub (`git@github.com:paulhannon0/Han.Server.git`)
-2. Navigate to the root directory on the command line and bring up the database and service itself using `docker-compose up -d`
+2. Navigate to the root directory on the command line and bring up the database and service using `docker-compose up -d`
 3. The service is now ready and exposed at the port specified in the docker-compose.yml (default: 8080)
 
 ## Project Structure
