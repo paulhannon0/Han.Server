@@ -23,11 +23,9 @@ namespace Han.Server.Api
             }
         }
 
-        public static void Migrate(IServiceProvider serviceProvider)
+        public static void Migrate(IMigrationRunner migrationRunner)
         {
-            var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
-
-            runner.MigrateUp();
+            migrationRunner.MigrateUp();
         }
     }
 }

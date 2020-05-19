@@ -38,14 +38,9 @@ namespace Han.Server.Api
             services.AddScoped<ICreateWidgetCommand, CreateWidgetCommand>();
             services.AddScoped<IGetWidgetQuery, GetWidgetQuery>();
             services.AddScoped<IWidgetsRepository, WidgetsRepository>();
-
-            var serviceProvider = services.BuildServiceProvider();
-
-            Database.Create();
-            Database.Migrate(serviceProvider);
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IMigrationRunner migrationRunner)
         {
             if (env.IsDevelopment())
             {
@@ -61,6 +56,9 @@ namespace Han.Server.Api
             {
                 endpoints.MapControllers();
             });
+
+            Database.Create();
+            Database.Migrate(migrationRunner);
         }
     }
 }
