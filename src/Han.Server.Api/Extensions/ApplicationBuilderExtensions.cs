@@ -9,5 +9,10 @@ namespace Han.Server.Api.Extensions
         {
             return application.UseMiddleware<HttpExceptionHandlingMiddleware>();
         }
+
+        public static IApplicationBuilder UseRequestLogging(this IApplicationBuilder builder)
+        {
+            return builder.UseMiddleware<RequestLoggingMiddleware>();
+        }
     }
 }
