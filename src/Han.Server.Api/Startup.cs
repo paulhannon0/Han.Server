@@ -50,7 +50,6 @@ namespace Han.Server.Api
             // app.UseHttpsRedirection();
             app.UseRouting();
             app.UseHttpExceptionHandling();
-            app.UseRequestLogging();
             // app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

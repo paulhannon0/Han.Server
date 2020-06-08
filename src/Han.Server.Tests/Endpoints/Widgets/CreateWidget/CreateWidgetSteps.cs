@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
@@ -9,19 +10,21 @@ namespace Han.Server.Tests.Endpoints.Widgets.CreateWidget
     [Binding]
     public class CreateWidgetSteps
     {
+        private readonly TestHost testHost;
         private Dictionary<string, object> requestBody;
         private HttpResponseMessage responseMessage;
         private readonly string path;
 
-        public CreateWidgetSteps()
+        public CreateWidgetSteps(TestHost testHost)
         {
-            this.path = "/widgets";
+            this.testHost = testHost;
+            this.testHost.EndpointPath = "/widgets";
         }
 
         [Given("a valid request body for the \'Create Widget\' endpoint")]
         public void GivenAValidRequestBodyForTheCreateWidgetEndpoint()
         {
-            this.requestBody = new Dictionary<string, object>
+            this.testHost.RequestBody = new Dictionary<string, object>
             {
                 { "Name", Guid.NewGuid().ToString() }
             };
@@ -30,23 +33,7 @@ namespace Han.Server.Tests.Endpoints.Widgets.CreateWidget
         [When("the request is made")]
         public async Task WhenTheRequestIsMade()
         {
-            this.responseMessage = await TestClient.PostAsync
-            (
-                this.path,
-                this.requestBody
-            );
-        }
-
-        [Then("the widget is created")]
-        public void ThenTheWidgetIsCreated()
-        {
-
-        }
-
-        [Then("the ID of the widget is returned in the Location response header")]
-        public void ThenTheIdOfTheWidgetIsReturnedInTheLocationResponseHeader()
-        {
-
+            this.responseMessage = await this.testHost.PostAsync();
         }
     }
 }
