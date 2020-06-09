@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
@@ -11,9 +7,6 @@ namespace Han.Server.Tests.Endpoints.Widgets.CreateWidget
     public class CreateWidgetSteps
     {
         private readonly TestHost testHost;
-        private Dictionary<string, object> requestBody;
-        private HttpResponseMessage responseMessage;
-        private readonly string path;
 
         public CreateWidgetSteps(TestHost testHost)
         {
@@ -24,16 +17,27 @@ namespace Han.Server.Tests.Endpoints.Widgets.CreateWidget
         [Given("a valid request body for the \'Create Widget\' endpoint")]
         public void GivenAValidRequestBodyForTheCreateWidgetEndpoint()
         {
-            this.testHost.RequestBody = new Dictionary<string, object>
+            this.testHost.RequestBody.Add("Name", CreateWidgetFixtures.ValidName);
+        }
+
+        [Given("a request body for the \'Create Widget\' endpoint containing an invalid (.*) parameter")]
+        public void GivenARequestBodyForTheCreateWidgetEndpointContainingAnInvalidParameter(string field)
+        {
+            switch (field)
             {
-                { "Name", Guid.NewGuid().ToString() }
-            };
+                case "Name":
+                    this.testHost.RequestBody.Add("Name", CreateWidgetFixtures.InvalidName);
+                    break;
+
+                default:
+                    break;
+            }
         }
 
         [When("the request is made")]
         public async Task WhenTheRequestIsMade()
         {
-            this.responseMessage = await this.testHost.PostAsync();
+            await this.testHost.PostAsync();
         }
     }
 }
