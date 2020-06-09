@@ -22,6 +22,8 @@ namespace Han.Server.Tests
 
         public TestHost()
         {
+            this.RequestBody = new Dictionary<string, object>();
+
             this.client = new WebApplicationFactory<Startup>().CreateClient();
         }
 
