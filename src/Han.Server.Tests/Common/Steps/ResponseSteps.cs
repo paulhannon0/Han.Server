@@ -1,7 +1,7 @@
 using NUnit.Framework;
 using TechTalk.SpecFlow;
 
-namespace Han.Server.Tests.Common
+namespace Han.Server.Tests.Common.Steps
 {
     [Binding]
     public class ResponseSteps

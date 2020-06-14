@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+using System;
 using TechTalk.SpecFlow;
 
 namespace Han.Server.Tests.Endpoints.Widgets.CreateWidget
@@ -7,6 +7,8 @@ namespace Han.Server.Tests.Endpoints.Widgets.CreateWidget
     public class CreateWidgetSteps
     {
         private readonly TestHost testHost;
+        private string validName = Guid.NewGuid().ToString();
+        private int invalidName = 1;
 
         public CreateWidgetSteps(TestHost testHost)
         {
@@ -14,30 +16,24 @@ namespace Han.Server.Tests.Endpoints.Widgets.CreateWidget
             this.testHost.EndpointPath = "/widgets";
         }
 
-        [Given("a valid request body for the \'Create Widget\' endpoint")]
+        [Given("a valid request for the \'Create Widget\' endpoint")]
         public void GivenAValidRequestBodyForTheCreateWidgetEndpoint()
         {
-            this.testHost.RequestBody.Add("Name", CreateWidgetFixtures.ValidName);
+            this.testHost.RequestBody.Add("Name", this.validName);
         }
 
-        [Given("a request body for the \'Create Widget\' endpoint containing an invalid (.*) parameter")]
+        [Given("a request for the \'Create Widget\' endpoint containing an invalid (.*) parameter")]
         public void GivenARequestBodyForTheCreateWidgetEndpointContainingAnInvalidParameter(string field)
         {
             switch (field)
             {
                 case "Name":
-                    this.testHost.RequestBody.Add("Name", CreateWidgetFixtures.InvalidName);
+                    this.testHost.RequestBody.Add("Name", this.invalidName);
                     break;
 
                 default:
                     break;
             }
-        }
-
-        [When("the request is made")]
-        public async Task WhenTheRequestIsMade()
-        {
-            await this.testHost.PostAsync();
         }
     }
 }
