@@ -1,7 +1,6 @@
 # VERB: PUT
 # PATH: /widgets/{Id}
 
-@ignore
 Feature: Update Widget
 
     Scenario: Request Successful

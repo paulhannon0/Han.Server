@@ -52,7 +52,7 @@ namespace Han.Server.Api.Controllers
             return GetWidgetResponseModel.FromBusinessModel(queryResponse);
         }
 
-        [HttpPost("/widgets/{Id}")]
+        [HttpPut("/widgets/{Id}")]
         [Consumes("application/json")]
         public async Task<IActionResult> Update(UpdateWidgetRequestModel requestModel)
         {

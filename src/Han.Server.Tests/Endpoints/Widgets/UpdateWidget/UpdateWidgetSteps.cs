@@ -8,6 +8,7 @@ using TechTalk.SpecFlow;
 namespace Han.Server.Tests.Endpoints.Widgets.UpdateWidget
 {
     [Binding]
+    [Scope(Feature = "Update Widget")]
     public class UpdateWidgetSteps
     {
         private readonly TestHost testHost;
@@ -26,6 +27,7 @@ namespace Han.Server.Tests.Endpoints.Widgets.UpdateWidget
             this.widgetName = "WidgetName";
         }
 
+        // TODO: NOTE FOR FUTURE SELF, THESE ARE RUNNING FOR EACH FEATURE FILE (i.e. THIS IS RUN WHEN GET WIDGET IS)
         [BeforeScenario]
         public async Task BeforeScenario()
         {

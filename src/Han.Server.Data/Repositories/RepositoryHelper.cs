@@ -14,7 +14,6 @@ namespace Han.Server.Data.Repositories
             using (var connection = new MySqlConnection(Environment.GetEnvironmentVariable("DATABASE_CONNECTION_STRING")))
             {
                 connection.Open();
-
                 UseDatabase(connection);
 
                 var castRecord = record as IRecord;
@@ -25,7 +24,6 @@ namespace Han.Server.Data.Repositories
                 var id = GetLastInsertedId(connection);
 
                 connection.Close();
-
                 return id;
             }
         }
@@ -35,13 +33,11 @@ namespace Han.Server.Data.Repositories
             using (var connection = new MySqlConnection(Environment.GetEnvironmentVariable("DATABASE_CONNECTION_STRING")))
             {
                 connection.Open();
-
                 UseDatabase(connection);
 
                 var record = await connection.GetAsync<T>(id);
 
                 connection.Close();
-
                 return record;
             }
         }
@@ -51,14 +47,25 @@ namespace Han.Server.Data.Repositories
             using (var connection = new MySqlConnection(Environment.GetEnvironmentVariable("DATABASE_CONNECTION_STRING")))
             {
                 connection.Open();
-
                 UseDatabase(connection);
 
                 var castRecord = record as IRecord;
-                castRecord.CreatedAt = DateTimeOffset.Now.ToUnixTimeMilliseconds();
 
                 await connection.UpdateAsync<T>(castRecord as T);
+                connection.Close();
+            }
+        }
 
+        public static async Task DeleteAsync<T>(T record) where T : class
+        {
+            using (var connection = new MySqlConnection(Environment.GetEnvironmentVariable("DATABASE_CONNECTION_STRING")))
+            {
+                connection.Open();
+                UseDatabase(connection);
+
+                var castRecord = record as IRecord;
+
+                await connection.DeleteAsync<T>(castRecord as T);
                 connection.Close();
             }
         }

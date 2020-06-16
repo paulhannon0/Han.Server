@@ -4,6 +4,7 @@ using TechTalk.SpecFlow;
 namespace Han.Server.Tests.Endpoints.Widgets.CreateWidget
 {
     [Binding]
+    [Scope(Feature = "Create Widget")]
     public class CreateWidgetSteps
     {
         private readonly TestHost testHost;
@@ -13,18 +14,23 @@ namespace Han.Server.Tests.Endpoints.Widgets.CreateWidget
         public CreateWidgetSteps(TestHost testHost)
         {
             this.testHost = testHost;
-            this.testHost.EndpointPath = "/widgets";
             this.validName = Guid.NewGuid().ToString();
             this.invalidName = 1;
         }
 
-        [Given("a valid request for the \'Create Widget\' endpoint")]
+        [Given("a valid request path for the \'Create Widget\' endpoint")]
+        public void GivenAValidRequestPathForTheCreateWidgetEndpoint()
+        {
+            this.testHost.EndpointPath = "/widgets";
+        }
+
+        [Given("a valid request body for the \'Create Widget\' endpoint")]
         public void GivenAValidRequestBodyForTheCreateWidgetEndpoint()
         {
             this.testHost.RequestBody.Add("Name", this.validName);
         }
 
-        [Given("a request for the \'Create Widget\' endpoint containing an invalid (.*) parameter")]
+        [Given("a request body for the \'Create Widget\' endpoint containing an invalid (.*) parameter")]
         public void GivenARequestBodyForTheCreateWidgetEndpointContainingAnInvalidParameter(string field)
         {
             switch (field)

@@ -7,6 +7,7 @@ using TechTalk.SpecFlow;
 namespace Han.Server.Tests.Endpoints.Widgets.GetWidget
 {
     [Binding]
+    [Scope(Feature = "Get Widget")]
     public class GetWidgetSteps
     {
         private readonly TestHost testHost;

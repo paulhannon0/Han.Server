@@ -1,4 +1,7 @@
+using NUnit.Framework;
 using TechTalk.SpecFlow;
+
+[assembly: NonParallelizable]
 
 namespace Han.Server.Tests
 {
