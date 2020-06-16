@@ -3,7 +3,7 @@
 ## Installation and Usage
 
 1. Clone the repository from GitHub (`git@github.com:paulhannon0/Han.Server.git`)
-2. Navigate to the root directory on the command line and bring up the database and service using `docker-compose up -d`
+2. Navigate to the root directory on the command line and bring up the database using `docker-compose up -d` (**note:** this takes around 30 seconds)
 3. Run the service from VSCode under `Run -> Start (With/Without) Debugging` (**note:** this method uses the environment variables found in .vscode/launch.json)
 
 ## Project Structure
