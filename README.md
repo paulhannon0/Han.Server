@@ -4,26 +4,44 @@
 
 1. Clone the repository from GitHub (`git@github.com:paulhannon0/Han.Server.git`)
 2. Navigate to the root directory on the command line and bring up the database and service using `docker-compose up -d`
-3. The service is now ready and exposed at the port specified in the docker-compose.yml (default: 8080)
+3. Run the service from VSCode under `Run -> Start (With/Without) Debugging` (**note:** this method uses the environment variables found in .vscode/launch.json)
 
 ## Project Structure
 
 ### Han.Server.Api
 
-This layer is the application host, as well as containing the endpoint controllers and request/response models.
+This layer contains:
+- Main application host
+- Configuration
+- Controllers
+- Extensions
+- Middleware
+- Models
 
 ### Han.Server.Business
 
-This layer contains the commands/queries which contain the business logic for a given operation, as well as data transfer objects for these operations.
+This layer contains:
+- Commands
+- Queries
+- Models
 
 ### Han.Server.Common
 
-This layer contains components which can be used in any layer, such as custom exceptions.
+This layer contains:
+- Exceptions
 
 ### Han.Server.Data
 
-This layer contains the repositories used to interact with the database, as well as migration scripts and data transfer objects for these interactions.
+This layer contains:
+- Migrations
+- Models
+- Repositories
 
 ### Han.Server.Tests
 
-This layer contains all tests for the API.
+This layer contains:
+- Common steps
+- Configuration
+- Endpoint integration tests
+- Helpers
+
