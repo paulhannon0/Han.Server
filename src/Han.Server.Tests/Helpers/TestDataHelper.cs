@@ -22,7 +22,7 @@ namespace Han.Server.Tests.Helpers
                 "/widgets",
                 new Dictionary<string, object>()
                 {
-                    { "Name", Guid.NewGuid().ToString() }
+                    { "Name", name }
                 }
             );
 

@@ -16,8 +16,6 @@ namespace Han.Server.Tests
 
         public HttpResponseMessage LastResponseMessage { get; set; }
 
-        public string LocationResponseHeader { get; set; }
-
         private readonly HttpClient client;
 
         public TestHost()
@@ -51,6 +49,20 @@ namespace Han.Server.Tests
             this.LastResponseMessage = response;
 
             return response;
+        }
+
+        public async Task<T> ExtractResponseBodyAsync<T>()
+        {
+            var stringBody = await this.LastResponseMessage.Content.ReadAsStringAsync();
+
+            return JsonSerializer.Deserialize<T>
+            (
+                stringBody,
+                new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                }
+            );
         }
     }
 }

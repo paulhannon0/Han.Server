@@ -1,5 +1,7 @@
 using System.Threading.Tasks;
+using Han.Server.Api.Models.Widgets;
 using Han.Server.Tests.Helpers;
+using NUnit.Framework;
 using TechTalk.SpecFlow;
 
 namespace Han.Server.Tests.Endpoints.Widgets.GetWidget
@@ -10,19 +12,23 @@ namespace Han.Server.Tests.Endpoints.Widgets.GetWidget
         private readonly TestHost testHost;
         private readonly TestDataHelper testDataHelper;
         private ulong validId;
-        private string invalidId = "invalid_id";
-        private ulong nonExistentId = 0;
+        private readonly string invalidId;
+        private readonly ulong nonExistentId;
+        private readonly string widgetName;
 
         public GetWidgetSteps(TestHost testHost, TestDataHelper testDataHelper)
         {
             this.testHost = testHost;
             this.testDataHelper = testDataHelper;
+            this.invalidId = "invalid_id";
+            this.nonExistentId = 0;
+            this.widgetName = "WidgetName";
         }
 
         [BeforeScenario]
         public async Task BeforeScenario()
         {
-            this.validId = await this.testDataHelper.CreateWidgetAsync("WidgetName");
+            this.validId = await this.testDataHelper.CreateWidgetAsync(this.widgetName);
         }
 
         [Given("a valid request path for the \'Get Widget\' endpoint")]
@@ -44,9 +50,12 @@ namespace Han.Server.Tests.Endpoints.Widgets.GetWidget
         }
 
         [Then(@"the Widget record can be found in the response body")]
-        public void ThenTheWidgetRecordCanBeFoundInTheResponseBody()
+        public async Task ThenTheWidgetRecordCanBeFoundInTheResponseBody()
         {
-            var something = 1;
+            var widget = await this.testHost.ExtractResponseBodyAsync<GetWidgetResponseModel>();
+
+            Assert.IsTrue(widget.Id > 0);
+            Assert.AreEqual(this.widgetName, widget.Name);
         }
 
         private void SetEndpointPath(object widgetId)
