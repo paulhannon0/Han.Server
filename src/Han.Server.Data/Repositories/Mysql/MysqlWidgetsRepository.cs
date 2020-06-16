@@ -14,5 +14,10 @@ namespace Han.Server.Data.Repositories.Mysql
         {
             return await RepositoryHelper.GetByIdAsync<WidgetRecord>(id);
         }
+
+        public async Task UpdateAsync(WidgetRecord widget)
+        {
+            await RepositoryHelper.UpdateAsync<WidgetRecord>(widget);
+        }
     }
 }

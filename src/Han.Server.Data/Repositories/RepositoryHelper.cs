@@ -46,6 +46,23 @@ namespace Han.Server.Data.Repositories
             }
         }
 
+        public static async Task UpdateAsync<T>(T record) where T : class
+        {
+            using (var connection = new MySqlConnection(Environment.GetEnvironmentVariable("DATABASE_CONNECTION_STRING")))
+            {
+                connection.Open();
+
+                UseDatabase(connection);
+
+                var castRecord = record as IRecord;
+                castRecord.CreatedAt = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+
+                await connection.UpdateAsync<T>(castRecord as T);
+
+                connection.Close();
+            }
+        }
+
         private static void UseDatabase(IDbConnection connection)
         {
             var command = connection.CreateCommand();

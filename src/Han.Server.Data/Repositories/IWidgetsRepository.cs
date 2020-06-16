@@ -8,5 +8,7 @@ namespace Han.Server.Data.Repositories
         Task<ulong> CreateAsync(WidgetRecord widget);
 
         Task<WidgetRecord> GetAsync(ulong id);
+
+        Task UpdateAsync(WidgetRecord widget);
     }
 }

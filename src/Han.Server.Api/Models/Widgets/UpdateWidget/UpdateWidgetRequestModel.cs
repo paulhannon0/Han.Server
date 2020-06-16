@@ -14,6 +14,7 @@ namespace Han.Server.Api.Models.Widgets.UpdateWidget
         {
             return new UpdateWidgetCommandRequestModel
             {
+                Id = this.Id,
                 Name = this.Name
             };
         }

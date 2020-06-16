@@ -14,16 +14,17 @@ namespace Han.Server.Business.Commands.Widgets.UpdateWidget
             this.widgetsRepository = widgetsRepository;
         }
 
-        public Task<byte> ExecuteAsync(UpdateWidgetCommandRequestModel commandRequest)
+        public async Task<ulong> ExecuteAsync(UpdateWidgetCommandRequestModel commandRequest)
         {
             var widget = new Widget
             {
+                Id = commandRequest.Id,
                 Name = commandRequest.Name
             };
 
-            // repository call
+            await this.widgetsRepository.UpdateAsync(widget.ToTableRecord());
 
-            return Task.FromResult(new byte());
+            return widget.Id;
         }
     }
 }
