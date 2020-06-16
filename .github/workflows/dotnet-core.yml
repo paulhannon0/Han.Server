@@ -19,8 +19,6 @@ jobs:
         dotnet-version: 3.1.101
     - name: Run docker-compose
       run: docker-compose up -d
-    - name: Wait for containers
-      run: sleep 30
     - name: Install dependencies
       run: dotnet restore src
     - name: Build
