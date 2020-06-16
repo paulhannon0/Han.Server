@@ -17,6 +17,8 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.101
+    - name: Run docker-compose
+      run: docker-compose up -d
     - name: Install dependencies
       run: dotnet restore src
     - name: Build
