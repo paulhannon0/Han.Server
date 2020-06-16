@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
@@ -26,8 +27,16 @@ namespace Han.Server.Tests.Common.Steps
                     await this.testHost.PostAsync();
                     break;
 
-                default:
+                case "PUT":
+                    await this.testHost.PutAsync();
                     break;
+
+                case "DELETE":
+                    await this.testHost.DeleteAsync();
+                    break;
+
+                default:
+                    throw new ArgumentException($"{method} is not a valid HTTP method.");
             }
         }
     }

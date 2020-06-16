@@ -51,6 +51,25 @@ namespace Han.Server.Tests
             return response;
         }
 
+        public async Task<HttpResponseMessage> PutAsync()
+        {
+            var bodyContent = new StringContent(JsonSerializer.Serialize(this.RequestBody), Encoding.UTF8, "application/json");
+            var response = await this.client.PutAsync(this.EndpointPath, bodyContent);
+
+            this.LastResponseMessage = response;
+
+            return response;
+        }
+
+        public async Task<HttpResponseMessage> DeleteAsync()
+        {
+            var response = await this.client.DeleteAsync(this.EndpointPath);
+
+            this.LastResponseMessage = response;
+
+            return response;
+        }
+
         public async Task<T> ExtractResponseBodyAsync<T>()
         {
             var stringBody = await this.LastResponseMessage.Content.ReadAsStringAsync();
