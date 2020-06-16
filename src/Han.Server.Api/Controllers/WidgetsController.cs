@@ -7,6 +7,7 @@ using Han.Server.Business.Commands.Widgets.CreateWidget;
 using Han.Server.Api.Models.Widgets.GetWidget;
 using Han.Server.Api.Models.Widgets.CreateWidget;
 using Han.Server.Api.Models.Widgets.UpdateWidget;
+using Han.Server.Business.Commands.Widgets.UpdateWidget;
 
 namespace Han.Server.Api.Controllers
 {
@@ -16,16 +17,19 @@ namespace Han.Server.Api.Controllers
         private readonly ILogger<WidgetsController> logger;
         private readonly ICreateWidgetCommand createWidgetCommand;
         private readonly IGetWidgetQuery getWidgetQuery;
+        private readonly IUpdateWidgetCommand updateWidgetCommand;
 
         public WidgetsController(
             ILogger<WidgetsController> logger,
             ICreateWidgetCommand createWidgetCommand,
-            IGetWidgetQuery getWidgetQuery
+            IGetWidgetQuery getWidgetQuery,
+            IUpdateWidgetCommand updateWidgetCommand
         )
         {
             this.logger = logger;
             this.createWidgetCommand = createWidgetCommand;
             this.getWidgetQuery = getWidgetQuery;
+            this.updateWidgetCommand = updateWidgetCommand;
         }
 
         [HttpPost("/widgets")]

@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Han.Server.Business.Commands.Widgets.UpdateWidget;
 
 namespace Han.Server.Api
 {
@@ -35,8 +36,14 @@ namespace Han.Server.Api
                         .ScanIn(typeof(IRecord).Assembly).For.Migrations()
                );
 
+            // Commands
             services.AddScoped<ICreateWidgetCommand, CreateWidgetCommand>();
+            services.AddScoped<IUpdateWidgetCommand, UpdateWidgetCommand>();
+
+            // Queries
             services.AddScoped<IGetWidgetQuery, GetWidgetQuery>();
+
+            // Repositories
             services.AddScoped<IWidgetsRepository, WidgetsRepository>();
         }
 
