@@ -1,6 +1,7 @@
 using System;
+using Han.Server.Business.Models.Widgets;
 
-namespace Han.Server.Api.Models.Widgets
+namespace Han.Server.Api.Models.Widgets.GetWidget
 {
     public class GetWidgetResponseModel
     {
@@ -12,7 +13,7 @@ namespace Han.Server.Api.Models.Widgets
 
         public DateTimeOffset? UpdatedAt { get; set; }
 
-        public static GetWidgetResponseModel FromBusinessModel(Han.Server.Business.Models.Widget widget)
+        public static GetWidgetResponseModel FromBusinessModel(Widget widget)
         {
             return new GetWidgetResponseModel
             {

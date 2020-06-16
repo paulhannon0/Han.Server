@@ -1,4 +1,4 @@
-using Han.Server.Business.Models;
+using Han.Server.Business.Models.Widgets;
 
 namespace Han.Server.Business.Queries.Widgets.GetWidget
 {

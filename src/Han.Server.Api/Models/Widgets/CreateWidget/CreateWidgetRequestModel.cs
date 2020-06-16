@@ -1,6 +1,6 @@
-using Han.Server.Business.Commands.Widgets.CreateWidget;
+using Han.Server.Business.Models.Widgets.CreateWidget;
 
-namespace Han.Server.Api.Models.Widgets
+namespace Han.Server.Api.Models.Widgets.CreateWidget
 {
     public class CreateWidgetRequestModel
     {

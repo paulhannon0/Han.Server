@@ -1,7 +1,7 @@
 using System;
 using Han.Server.Data.Models;
 
-namespace Han.Server.Business.Models
+namespace Han.Server.Business.Models.Widgets
 {
     public class Widget
     {

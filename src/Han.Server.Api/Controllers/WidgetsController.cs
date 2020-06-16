@@ -4,6 +4,9 @@ using Microsoft.Extensions.Logging;
 using Han.Server.Api.Models.Widgets;
 using Han.Server.Business.Queries.Widgets.GetWidget;
 using Han.Server.Business.Commands.Widgets.CreateWidget;
+using Han.Server.Api.Models.Widgets.GetWidget;
+using Han.Server.Api.Models.Widgets.CreateWidget;
+using Han.Server.Api.Models.Widgets.UpdateWidget;
 
 namespace Han.Server.Api.Controllers
 {
@@ -43,6 +46,16 @@ namespace Han.Server.Api.Controllers
             var queryResponse = await this.getWidgetQuery.ExecuteAsync(queryRequest);
 
             return GetWidgetResponseModel.FromBusinessModel(queryResponse);
+        }
+
+        [HttpPost("/widgets/{Id}")]
+        [Consumes("application/json")]
+        public async Task<IActionResult> Update(UpdateWidgetRequestModel requestModel)
+        {
+            var commandRequest = requestModel.ToCommandRequest();
+            var commandResponse = await this.updateWidgetCommand.ExecuteAsync(commandRequest);
+
+            return NoContent();
         }
     }
 }

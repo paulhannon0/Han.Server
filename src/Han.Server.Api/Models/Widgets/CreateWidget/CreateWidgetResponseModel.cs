@@ -1,4 +1,4 @@
-namespace Han.Server.Api.Models.Widgets
+namespace Han.Server.Api.Models.Widgets.CreateWidget
 {
     public class CreateWidgetResponseModel
     {

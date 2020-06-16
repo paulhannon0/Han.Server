@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using Han.Server.Api.Models.Widgets;
+using Han.Server.Api.Models.Widgets.GetWidget;
 using Han.Server.Tests.Helpers;
 using NUnit.Framework;
 using TechTalk.SpecFlow;
