@@ -2,7 +2,7 @@ using Han.Server.Business.Models.Widgets.CreateWidget;
 
 namespace Han.Server.Api.Models.Widgets.CreateWidget
 {
-    public class CreateWidgetRequestModel
+    public class CreateWidgetRequestBody
     {
         public string Name { get; set; }
 

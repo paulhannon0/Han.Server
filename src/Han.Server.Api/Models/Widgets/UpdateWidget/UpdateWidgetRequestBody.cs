@@ -1,20 +1,16 @@
 using Han.Server.Business.Models.Widgets.UpdateWidget;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Han.Server.Api.Models.Widgets.UpdateWidget
 {
-    public class UpdateWidgetRequestModel
+    public class UpdateWidgetRequestBody
     {
-        [FromRoute]
-        public ulong Id { get; set; }
-
         public string Name { get; set; }
 
-        public UpdateWidgetCommandRequestModel ToCommandRequest()
+        public UpdateWidgetCommandRequestModel ToCommandRequest(ulong id)
         {
             return new UpdateWidgetCommandRequestModel
             {
-                Id = this.Id,
+                Id = id,
                 Name = this.Name
             };
         }

@@ -34,7 +34,9 @@ namespace Han.Server.Api.Controllers
 
         [HttpPost("/widgets")]
         [Consumes("application/json")]
-        public async Task<IActionResult> Create(CreateWidgetRequestModel requestModel)
+        public async Task<IActionResult> Create(
+            [FromBody] CreateWidgetRequestBody requestModel
+        )
         {
             var commandRequest = requestModel.ToCommandRequest();
             var commandResponse = await this.createWidgetCommand.ExecuteAsync(commandRequest);
@@ -44,7 +46,9 @@ namespace Han.Server.Api.Controllers
 
         [HttpGet("/widgets/{Id}")]
         [Produces("application/json")]
-        public async Task<ActionResult<GetWidgetResponseModel>> Get([FromRoute] ulong id)
+        public async Task<ActionResult<GetWidgetResponseModel>> Get(
+            [FromRoute] ulong id
+        )
         {
             var queryRequest = new GetWidgetQueryRequestModel { Id = id };
             var queryResponse = await this.getWidgetQuery.ExecuteAsync(queryRequest);
@@ -54,9 +58,12 @@ namespace Han.Server.Api.Controllers
 
         [HttpPut("/widgets/{Id}")]
         [Consumes("application/json")]
-        public async Task<IActionResult> Update(UpdateWidgetRequestModel requestModel)
+        public async Task<IActionResult> Update(
+            [FromRoute] ulong id,
+            [FromBody] UpdateWidgetRequestBody requestBody
+        )
         {
-            var commandRequest = requestModel.ToCommandRequest();
+            var commandRequest = requestBody.ToCommandRequest(id);
             var commandResponse = await this.updateWidgetCommand.ExecuteAsync(commandRequest);
 
             return NoContent();

@@ -27,7 +27,6 @@ namespace Han.Server.Tests.Endpoints.Widgets.UpdateWidget
             this.widgetName = "WidgetName";
         }
 
-        // TODO: NOTE FOR FUTURE SELF, THESE ARE RUNNING FOR EACH FEATURE FILE (i.e. THIS IS RUN WHEN GET WIDGET IS)
         [BeforeScenario]
         [Scope(Feature = "Update Widget")]
         public async Task BeforeScenario()
