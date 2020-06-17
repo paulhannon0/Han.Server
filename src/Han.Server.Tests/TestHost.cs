@@ -51,6 +51,13 @@ namespace Han.Server.Tests
             return response;
         }
 
+        public async Task<HttpResponseMessage> GetAsync(string path)
+        {
+            var response = await this.client.GetAsync(path);
+
+            return response;
+        }
+
         public async Task<HttpResponseMessage> PutAsync()
         {
             var bodyContent = new StringContent(JsonSerializer.Serialize(this.RequestBody), Encoding.UTF8, "application/json");

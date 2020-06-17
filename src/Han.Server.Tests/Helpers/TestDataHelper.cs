@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Text.Json;
 using System.Threading.Tasks;
+using Han.Server.Api.Models.Widgets.GetWidget;
 using Han.Server.Data.Repositories;
 
 namespace Han.Server.Tests.Helpers
@@ -32,6 +34,20 @@ namespace Han.Server.Tests.Helpers
             );
 
             return ulong.Parse(await responseMessage.Content.ReadAsStringAsync());
+        }
+
+        public async Task<GetWidgetResponseModel> GetWidgetAsync(ulong id)
+        {
+            var responseMessage = await this.testHost.GetAsync($"/widgets/{id}");
+
+            return JsonSerializer.Deserialize<GetWidgetResponseModel>
+            (
+                await responseMessage.Content.ReadAsStringAsync(),
+                new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                }
+            );
         }
     }
 }

@@ -35,6 +35,7 @@ namespace Han.Server.Business.Models.Widgets
         {
             return new WidgetRecord
             {
+                Id = this.Id,
                 Name = this.Name
             };
         }

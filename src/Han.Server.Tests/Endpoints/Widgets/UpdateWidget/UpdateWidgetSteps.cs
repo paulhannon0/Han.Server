@@ -1,6 +1,5 @@
 using System;
 using System.Threading.Tasks;
-using Han.Server.Api.Models.Widgets;
 using Han.Server.Tests.Helpers;
 using NUnit.Framework;
 using TechTalk.SpecFlow;
@@ -17,6 +16,7 @@ namespace Han.Server.Tests.Endpoints.Widgets.UpdateWidget
         private readonly string invalidId;
         private readonly ulong nonExistentId;
         private readonly string widgetName;
+        private readonly string updatedWidgetName;
 
         public UpdateWidgetSteps(TestHost testHost, TestDataHelper testDataHelper)
         {
@@ -25,6 +25,7 @@ namespace Han.Server.Tests.Endpoints.Widgets.UpdateWidget
             this.invalidId = "invalid_id";
             this.nonExistentId = 0;
             this.widgetName = "WidgetName";
+            this.updatedWidgetName = "UpdatedWidgetName";
         }
 
         [BeforeScenario]
@@ -43,7 +44,7 @@ namespace Han.Server.Tests.Endpoints.Widgets.UpdateWidget
         [Given("a valid request body for the \'Update Widget\' endpoint")]
         public void GivenAValidRequestBodyForTheUpdateWidgetEndpoint()
         {
-            this.testHost.RequestBody.Add("Name", Guid.NewGuid().ToString());
+            this.testHost.RequestBody.Add("Name", this.updatedWidgetName);
         }
 
         [Given("a request path for the \'Update Widget\' endpoint with an invalid (.*) parameter")]
@@ -58,6 +59,13 @@ namespace Han.Server.Tests.Endpoints.Widgets.UpdateWidget
             this.SetEndpointPath(this.nonExistentId);
         }
 
+        [Then("the Widget record has been updated in the database")]
+        public async Task ThenTheWidgetRecordHasBeenUpdatedInTheDatabase()
+        {
+            var record = await this.testDataHelper.GetWidgetAsync(this.validId);
+
+            Assert.AreEqual(this.updatedWidgetName, record.Name);
+        }
         private void SetEndpointPath(object widgetId)
         {
             this.testHost.EndpointPath = $"/widgets/{widgetId}";

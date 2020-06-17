@@ -9,6 +9,7 @@ Feature: Update Widget
         And a valid request body for the 'Update Widget' endpoint
         When the PUT request is made
         Then (204) OK is returned
+        And the Widget record has been updated in the database
 
 # Scenario: Request Failure - Invalid Id URL parameter
 
