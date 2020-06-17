@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Han.Server.Api.Models.Widgets;
 using Han.Server.Business.Queries.Widgets.GetWidget;
 using Han.Server.Business.Commands.Widgets.CreateWidget;
 using Han.Server.Api.Models.Widgets.GetWidget;

@@ -1,4 +1,9 @@
 using System;
+using System.Linq;
+using System.Threading.Tasks;
+using Han.Server.Data.Models;
+using Han.Server.Tests.Helpers;
+using NUnit.Framework;
 using TechTalk.SpecFlow;
 
 namespace Han.Server.Tests.Endpoints.Widgets.CreateWidget
@@ -8,12 +13,15 @@ namespace Han.Server.Tests.Endpoints.Widgets.CreateWidget
     public class CreateWidgetSteps
     {
         private readonly TestHost testHost;
+        private readonly TestDataHelper testDataHelper;
         private readonly string validName;
         private readonly int invalidName;
+        private ulong newResourceId;
 
-        public CreateWidgetSteps(TestHost testHost)
+        public CreateWidgetSteps(TestHost testHost, TestDataHelper testDataHelper)
         {
             this.testHost = testHost;
+            this.testDataHelper = testDataHelper;
             this.validName = Guid.NewGuid().ToString();
             this.invalidName = 1;
         }
@@ -42,6 +50,28 @@ namespace Han.Server.Tests.Endpoints.Widgets.CreateWidget
                 default:
                     break;
             }
+        }
+
+        [Then("the Location response header contains the ID of the new resource")]
+        public void ThenTheLocationResponseHeaderContainsTheIdOfTheNewResource()
+        {
+            var locationHeader = this.testHost.LastResponseMessage.Headers.Location;
+
+            this.newResourceId = ulong.Parse
+            (
+                locationHeader
+                    .ToString()
+                    .Split("/")
+                    .LastOrDefault()
+            );
+        }
+
+        [Then("the Widget record has been inserted into the database")]
+        public async Task ThenTheWidgetRecordHasBeenInsertedIntoTheDatabase()
+        {
+            var doesRecordExist = await this.testDataHelper.DoesRecordExist<WidgetRecord>(this.newResourceId);
+
+            Assert.IsTrue(doesRecordExist);
         }
     }
 }

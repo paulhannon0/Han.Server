@@ -9,6 +9,8 @@ Feature: Create Widget
         And a valid request body for the 'Create Widget' endpoint
         When the POST request is made
         Then (201) Created is returned
+        And the Location response header contains the ID of the new resource
+        And the Widget record has been inserted into the database
 
     Scenario: Request Failure - Invalid Name body parameter
 
