@@ -29,6 +29,7 @@ namespace Han.Server.Tests.Endpoints.Widgets.UpdateWidget
 
         // TODO: NOTE FOR FUTURE SELF, THESE ARE RUNNING FOR EACH FEATURE FILE (i.e. THIS IS RUN WHEN GET WIDGET IS)
         [BeforeScenario]
+        [Scope(Feature = "Update Widget")]
         public async Task BeforeScenario()
         {
             this.validId = await this.testDataHelper.CreateWidgetAsync(this.widgetName);

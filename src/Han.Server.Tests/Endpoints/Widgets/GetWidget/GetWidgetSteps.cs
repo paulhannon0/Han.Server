@@ -27,6 +27,7 @@ namespace Han.Server.Tests.Endpoints.Widgets.GetWidget
         }
 
         [BeforeScenario]
+        [Scope(Feature = "Get Widget")]
         public async Task BeforeScenario()
         {
             this.validId = await this.testDataHelper.CreateWidgetAsync(this.widgetName);
