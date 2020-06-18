@@ -10,5 +10,7 @@ namespace Han.Server.Data.Repositories
         Task<WidgetRecord> GetAsync(ulong id);
 
         Task UpdateAsync(WidgetRecord widget);
+
+        Task DeleteAsync(ulong id);
     }
 }

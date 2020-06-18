@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Han.Server.Business.Commands.Widgets.UpdateWidget;
+using Han.Server.Business.Commands.Widgets.DeleteWidget;
 
 namespace Han.Server.Api
 {
@@ -39,6 +40,7 @@ namespace Han.Server.Api
             // Commands
             services.AddScoped<ICreateWidgetCommand, CreateWidgetCommand>();
             services.AddScoped<IUpdateWidgetCommand, UpdateWidgetCommand>();
+            services.AddScoped<IDeleteWidgetCommand, DeleteWidgetCommand>();
 
             // Queries
             services.AddScoped<IGetWidgetQuery, GetWidgetQuery>();

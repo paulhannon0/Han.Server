@@ -7,6 +7,9 @@ using Han.Server.Api.Models.Widgets.GetWidget;
 using Han.Server.Api.Models.Widgets.CreateWidget;
 using Han.Server.Api.Models.Widgets.UpdateWidget;
 using Han.Server.Business.Commands.Widgets.UpdateWidget;
+using Han.Server.Business.Models.Widgets.GetWidget;
+using Han.Server.Business.Models.Widgets.DeleteWidget;
+using Han.Server.Business.Commands.Widgets.DeleteWidget;
 
 namespace Han.Server.Api.Controllers
 {
@@ -17,18 +20,21 @@ namespace Han.Server.Api.Controllers
         private readonly ICreateWidgetCommand createWidgetCommand;
         private readonly IGetWidgetQuery getWidgetQuery;
         private readonly IUpdateWidgetCommand updateWidgetCommand;
+        private readonly IDeleteWidgetCommand deleteWidgetCommand;
 
         public WidgetsController(
             ILogger<WidgetsController> logger,
             ICreateWidgetCommand createWidgetCommand,
             IGetWidgetQuery getWidgetQuery,
-            IUpdateWidgetCommand updateWidgetCommand
+            IUpdateWidgetCommand updateWidgetCommand,
+            IDeleteWidgetCommand deleteWidgetCommand
         )
         {
             this.logger = logger;
             this.createWidgetCommand = createWidgetCommand;
             this.getWidgetQuery = getWidgetQuery;
             this.updateWidgetCommand = updateWidgetCommand;
+            this.deleteWidgetCommand = deleteWidgetCommand;
         }
 
         [HttpPost("/widgets")]
@@ -64,6 +70,17 @@ namespace Han.Server.Api.Controllers
         {
             var commandRequest = requestBody.ToCommandRequest(id);
             var commandResponse = await this.updateWidgetCommand.ExecuteAsync(commandRequest);
+
+            return NoContent();
+        }
+
+        [HttpDelete("/widgets/{Id}")]
+        public async Task<IActionResult> Delete(
+            [FromRoute] ulong id
+        )
+        {
+            var commandRequest = new DeleteWidgetCommandRequestModel { Id = id };
+            await this.deleteWidgetCommand.ExecuteAsync(commandRequest);
 
             return NoContent();
         }

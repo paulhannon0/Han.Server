@@ -1,6 +1,7 @@
 using System.Net;
 using System.Threading.Tasks;
 using Han.Server.Business.Models.Widgets;
+using Han.Server.Business.Models.Widgets.GetWidget;
 using Han.Server.Common.Exceptions;
 using Han.Server.Data.Repositories;
 

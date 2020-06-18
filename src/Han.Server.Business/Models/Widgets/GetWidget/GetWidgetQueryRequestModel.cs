@@ -1,4 +1,4 @@
-namespace Han.Server.Business.Queries.Widgets.GetWidget
+namespace Han.Server.Business.Models.Widgets.GetWidget
 {
     public class GetWidgetQueryRequestModel
     {

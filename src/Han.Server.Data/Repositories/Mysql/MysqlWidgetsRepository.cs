@@ -19,5 +19,16 @@ namespace Han.Server.Data.Repositories.Mysql
         {
             await RepositoryHelper.UpdateAsync<WidgetRecord>(widget);
         }
+
+        public async Task DeleteAsync(ulong id)
+        {
+            await RepositoryHelper.DeleteAsync<WidgetRecord>
+            (
+                new WidgetRecord
+                {
+                    Id = id
+                }
+            );
+        }
     }
 }
