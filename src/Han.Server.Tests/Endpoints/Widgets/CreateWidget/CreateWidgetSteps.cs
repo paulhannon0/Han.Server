@@ -60,12 +60,12 @@ namespace Han.Server.Tests.Endpoints.Widgets.CreateWidget
             this.newResourceId = ulong.Parse
             (
                 locationHeader
-                    .ToString()
+                    ?.ToString()
                     .Split("/")
                     .LastOrDefault()
             );
 
-            Assert.IsNotNull(this.newResourceId);
+            Assert.AreNotEqual(0, this.newResourceId);
         }
 
         [Then("the Widget record has been inserted into the database")]
