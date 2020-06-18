@@ -64,6 +64,8 @@ namespace Han.Server.Tests.Endpoints.Widgets.CreateWidget
                     .Split("/")
                     .LastOrDefault()
             );
+
+            Assert.IsNotNull(this.newResourceId);
         }
 
         [Then("the Widget record has been inserted into the database")]
